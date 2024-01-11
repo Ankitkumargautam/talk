@@ -1,6 +1,11 @@
 const express = require('express');
+const connectDB = require('./config/db');
 const { chats } = require('./data/data');
+var colors = require('colors/safe');
+
 require('dotenv').config({ path: __dirname + '/.env' });
+
+connectDB();
 const app = express();
 
 app.get('/', (req, res) => {
@@ -20,6 +25,6 @@ const PORT = process.env.PORT || 5000;
 
 const server = app.listen(
   PORT,
-  console.log(`Server running on PORT ${PORT}...`)
-  // console.log(`Server running on PORT ${PORT}...`.yellow.bold)
+  // console.log(`Server running on PORT ${PORT}...`)
+  console.log(colors.yellow(`Server running on PORT ${PORT}...`))
 );
