@@ -1,9 +1,6 @@
 const express = require('express');
 const { chats } = require('./data/data');
-const dotenv = require('dotenv');
-
-dotenv.config();
-
+require('dotenv').config({ path: __dirname + '/.env' });
 const app = express();
 
 app.get('/', (req, res) => {
