@@ -4,12 +4,14 @@ const { chats } = require('./data/data');
 var colors = require('colors/safe');
 const userRoute = require('./route/userRoute');
 const { errorHandler } = require('./middleware/errorMiddleware');
+const cors = require('cors');
 
 require('dotenv').config({ path: __dirname + '/.env' });
 
 connectDB();
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use('/api/users', userRoute);
