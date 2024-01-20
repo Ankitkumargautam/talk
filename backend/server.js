@@ -26,3 +26,14 @@ const server = app.listen(
   // console.log(`Server running on PORT ${PORT}...`)
   console.log(colors.yellow(`Server running on PORT ${PORT}...`))
 );
+
+const io = require('socket.io')(server, {
+  pingTimeout: 60000,
+  cors: {
+    origin: process.env.FrontendUrl,
+  },
+});
+
+io.on('connection', (socket) => {
+  console.log('Connected to socket.io');
+});

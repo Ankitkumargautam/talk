@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 const Chatpage = () => {
   const [chats, setChats] = useState([]);
@@ -9,6 +10,7 @@ const Chatpage = () => {
   };
   useEffect(() => {
     loadChat();
+    io(process.env.REACT_APP_BASEURL);
   }, []);
   return (
     <div>
