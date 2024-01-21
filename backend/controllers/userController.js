@@ -67,4 +67,28 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerUser, loginUser };
+const getAllUser = asyncHandler(async (req, res) => {
+  try {
+    const searchTerm = req.query.search
+      ? JSON.parse(req.query.search.trim())
+      : '';
+
+    const keyword = searchTerm
+      ? {
+          $or: [
+            { name: { $regex: `^${searchTerm}`, $options: 'i' } },
+            { email: { $regex: `^${searchTerm}`, $options: 'i' } },
+          ],
+        }
+      : {};
+
+    const users = await User.find(keyword).find({ _id: { $ne: req.user._id } });
+
+    return res.status(200).json(users);
+  } catch (error) {
+    res.status(500);
+    throw new Error('Server Error');
+  }
+});
+
+module.exports = { registerUser, loginUser, getAllUser };
