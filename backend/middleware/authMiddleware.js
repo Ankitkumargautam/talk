@@ -8,7 +8,6 @@ const protect = asyncHandler(async (req, res, next) => {
     try {
       token = req.headers.authorization.split(' ')[1];
       const decodedToken = await jwt.verify(token, process.env.JWT_SECRET); //will throw TokenExpiredError
-      console.log('decodedToken: ', decodedToken);
       req.user = await User.findById(decodedToken.id).select('-password');
       next();
     } catch (error) {

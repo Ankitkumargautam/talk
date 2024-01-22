@@ -3,6 +3,7 @@ const connectDB = require('./config/db');
 const { chats } = require('./data/data');
 var colors = require('colors/safe');
 const userRoute = require('./route/userRoute');
+const chatRoute = require('./route/chatRoute');
 const { errorHandler } = require('./middleware/errorMiddleware');
 const cors = require('cors');
 
@@ -14,7 +15,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//route
 app.use('/api/users', userRoute);
+app.use('/api/chat', chatRoute);
 
 //error handling for any error in api
 app.use(errorHandler);
