@@ -13,6 +13,7 @@ import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import useShow from '../../hooks/useShow';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
   const {
@@ -23,6 +24,7 @@ const Login = () => {
   } = useForm();
 
   const toast = useToast();
+  const history = useHistory();
 
   const [show, setShow] = useShow();
   const [loading, setLoading] = useState(false);
@@ -43,6 +45,7 @@ const Login = () => {
       });
 
       localStorage.setItem('userInfo', JSON.stringify(data));
+      history.push('/chats');
     } catch (error) {
       toast({
         title: 'Error Occured!',
