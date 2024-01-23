@@ -18,3 +18,7 @@
 - rename chat (done)
 - add to group (done)
 - remove from group (done)
+
+4. commit 15 24 jan 2023
+
+- made chat page with search user functionality and setSearchUser

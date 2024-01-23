@@ -6,6 +6,7 @@ const connectDB = async () => {
     const conn = await mongoose.connect(process.env.DBString, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
+      useCreateIndex: true,
     });
     console.log(
       colors.blue.underline(`MongoDB connected: ${conn.connection.host}`)
