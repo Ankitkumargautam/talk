@@ -26,3 +26,9 @@
 5. commit 16 24 jan 2024
 
 - made my chat component with functionality
+
+6. commit 18 25 jan 2024
+
+- protected route and
+- debugging and
+- group creation functionality

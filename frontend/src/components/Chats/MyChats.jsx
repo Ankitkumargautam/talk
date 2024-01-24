@@ -14,7 +14,7 @@ const MyChats = () => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${user.token}`,
+          Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
         },
       };
       const { data } = await axios.get(

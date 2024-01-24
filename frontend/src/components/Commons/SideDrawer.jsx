@@ -23,7 +23,7 @@ import {
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { ChatState } from '../../Context/ChatProvider';
 import ProfileModal from './ProfileModal';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import ChatLoading from '../Chats/ChatLoading';
 import UserListItem from '../Chats/UserListItem';
@@ -32,11 +32,11 @@ const SideDrawer = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
-  const history = useHistory();
+  const navigate = useNavigate();
   const { user, setSelectedChat, chats, setChats } = ChatState();
   const logoutHandler = () => {
     localStorage.removeItem('userInfo');
-    history.push('/');
+    navigate('/');
   };
 
   const toast = useToast();
@@ -202,9 +202,6 @@ const SideDrawer = () => {
                   handleFunction={() => accessChat(user._id)}
                 />
               ))
-            )}
-            {searchResult.length === 0 && (
-              <Text>No user found with: {JSON.stringify(search)}</Text>
             )}
             {chatLoading && (
               <Box d="flex" justifyContent="center" alignItems="center">

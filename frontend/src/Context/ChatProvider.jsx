@@ -1,4 +1,4 @@
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 const { createContext, useContext, useEffect, useState } = require('react');
 
 const ChatContext = createContext();
@@ -7,10 +7,10 @@ const ChatProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [selectedChat, setSelectedChat] = useState([]);
   const [chats, setChats] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
   useEffect(() => {
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-    if (!userInfo) history.push('/');
+    if (!userInfo) navigate('/');
     setUser(userInfo);
   }, []);
   return (
