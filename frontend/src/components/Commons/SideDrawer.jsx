@@ -33,7 +33,7 @@ const SideDrawer = () => {
   const btnRef = React.useRef();
 
   const history = useHistory();
-  const { user, setSelectedChat } = ChatState();
+  const { user, setSelectedChat, chats, setChats } = ChatState();
   const logoutHandler = () => {
     localStorage.removeItem('userInfo');
     history.push('/');
@@ -103,9 +103,11 @@ const SideDrawer = () => {
         },
         config
       );
+      if (!chats.find((c) => c._id === data._id)) setChats([data, ...chats]);
       console.log('chat data: ', data);
       setSelectedChat(data);
       setChatLoading(false);
+      onClose();
     } catch (error) {
       setChatLoading(false);
       toast({
