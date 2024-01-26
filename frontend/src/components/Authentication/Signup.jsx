@@ -5,6 +5,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Text,
   useToast,
   VStack,
 } from '@chakra-ui/react';
@@ -94,6 +95,11 @@ const Signup = () => {
             <Input {...field} placeholder="Enter Your Name" />
           )}
         />
+        {errors.name && (
+          <Text color="red" px={3}>
+            {errors.name.message}
+          </Text>
+        )}
       </FormControl>
       <FormControl isRequired>
         <FormLabel>Email</FormLabel>
@@ -112,7 +118,11 @@ const Signup = () => {
             <Input {...field} placeholder="Enter Your Email Address" />
           )}
         />
-        {errors.email && <span>{errors.email.message}</span>}
+        {errors.email && (
+          <Text color="red" px={3}>
+            {errors.email.message}
+          </Text>
+        )}
       </FormControl>
       <FormControl isRequired>
         <FormLabel>Password</FormLabel>
@@ -136,6 +146,11 @@ const Signup = () => {
               />
             )}
           />
+          {errors.password && (
+            <Text color="red" px={3}>
+              {errors.password.message}
+            </Text>
+          )}
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={() => setShow()}>
               {show ? 'Hide' : 'Show'}
@@ -165,7 +180,11 @@ const Signup = () => {
               />
             )}
           />
-
+          {errors.confirmPassword && (
+            <Text color="red" px={3}>
+              {errors.confirmPassword.message}
+            </Text>
+          )}
           <InputRightElement width="4.5rem">
             <Button h="1.75rem" size="sm" onClick={() => setShowConfirm()}>
               {showConfirm ? 'Hide' : 'Show'}

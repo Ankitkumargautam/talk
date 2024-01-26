@@ -7,7 +7,7 @@ import { getSender } from '../../utils/ChatLogics';
 import ChatLoading from '../Chats/ChatLoading';
 import GroupChatModal from './GroupChatModal';
 
-const MyChats = () => {
+const MyChats = ({ fetchAgain, openModalGroup }) => {
   const { user, selectedChat, setSelectedChat, chats, setChats } = ChatState();
   const toast = useToast();
   const fetchChats = async () => {
@@ -36,11 +36,14 @@ const MyChats = () => {
 
   useEffect(() => {
     fetchChats();
-  }, []);
+  }, [fetchAgain]);
 
   return (
     <Box
-      d={{ base: selectedChat ? 'none' : 'flex', md: 'flex' }}
+      d={{
+        base: Object.keys(selectedChat).length > 0 ? 'none' : 'flex',
+        md: 'flex',
+      }}
       flexDir="column"
       alignItems="center"
       p={3}
@@ -70,6 +73,9 @@ const MyChats = () => {
           </Button>
         </GroupChatModal>
       </Box>
+      <Box p={4}>
+        <Text onClick={() => openModalGroup()}>Group modal</Text>
+      </Box>
       <Box
         d="flex"
         flexDir="column"
@@ -80,7 +86,7 @@ const MyChats = () => {
         borderRadius="lg"
         overflowY="hidden"
       >
-        {chats ? (
+        {chats.length > 1 ? (
           <Stack overflowY="scroll">
             {chats.map((chat, index) => (
               <Box

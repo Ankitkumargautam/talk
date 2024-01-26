@@ -28,7 +28,8 @@ import React, { useState } from 'react';
 import ChatLoading from '../Chats/ChatLoading';
 import UserListItem from '../Chats/UserListItem';
 import axios from 'axios';
-const SideDrawer = () => {
+
+const Navbar = ({ openModal, openModalDrawer }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -142,6 +143,15 @@ const SideDrawer = () => {
             </Text>
           </Button>
         </Tooltip>
+        <Tooltip label="Search Users to chat" hasArrow placement="bottom-end">
+          <Button variant="ghost" onClick={() => openModalDrawer()}>
+            <i className="fas fa-search"></i>
+            <Text d={{ base: 'none', md: 'flex' }} px={4}>
+              Search modal
+            </Text>
+          </Button>
+        </Tooltip>
+
         <Text fontSize="2xl" fontFamily="Work sans">
           Talk-A-Tive
         </Text>
@@ -161,9 +171,11 @@ const SideDrawer = () => {
               />
             </MenuButton>
             <MenuList>
-              <ProfileModal>
+              <ProfileModal user={user}>
                 <MenuItem>My Profile</MenuItem>
               </ProfileModal>
+              <MenuDivider />
+              <MenuItem onClick={() => openModal()}>Modal</MenuItem>
               <MenuDivider />
               <MenuItem onClick={logoutHandler}>Logout</MenuItem>
             </MenuList>
@@ -215,4 +227,4 @@ const SideDrawer = () => {
   );
 };
 
-export default SideDrawer;
+export default Navbar;

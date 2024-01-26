@@ -80,8 +80,9 @@ const GroupChatModal = ({ children }) => {
         isClosable: true,
         position: 'top',
       });
+    } else {
+      setSelectedUsers([...selectedUsers, userToAdd]);
     }
-    setSelectedUsers([...selectedUsers, userToAdd]);
   };
 
   const handleDelete = (delUser) => {
@@ -89,7 +90,7 @@ const GroupChatModal = ({ children }) => {
   };
 
   const handleSubmit = async () => {
-    if (!groupChatName || !selectedUsers) {
+    if (!groupChatName || selectedUsers.length < 1) {
       toast({
         title: 'Please fill all the feilds',
         status: 'warning',

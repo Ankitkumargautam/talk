@@ -1,0 +1,41 @@
+.modal-overlay-profile {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content-profile {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.modal-header-profile {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.modal-title-profile {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.close-button-profile {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: #333;
+}
+
+.modal-body-profile {
+  font-size: 16px;
+}

@@ -14,8 +14,8 @@ import {
 } from '@chakra-ui/react';
 import { ChatState } from '../../Context/ChatProvider';
 
-const ProfileModal = ({ children }) => {
-  const { user } = ChatState();
+const ProfileModal = ({ user, children }) => {
+  // const { user } = ChatState();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (

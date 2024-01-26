@@ -1,0 +1,54 @@
+/* SideDrawer.css */
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  z-index: 9999;
+  animation: slideIn 0.3s ease-in-out;
+}
+
+.drawer-content {
+  background: #fff;
+  width: 40%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.drawer-title {
+  font-size: 20px;
+}
+
+.drawer-close-button {
+  background: #ddd;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.drawer-body {
+  padding: 10px;
+}
+
+/* Animation */
+@keyframes slideIn {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(-0);
+  }
+}

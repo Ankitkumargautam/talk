@@ -5,6 +5,7 @@ import {
   Input,
   InputGroup,
   InputRightElement,
+  Text,
   useToast,
   VStack,
 } from '@chakra-ui/react';
@@ -84,7 +85,11 @@ const Login = () => {
             <Input {...field} placeholder="Enter Your Email Address" />
           )}
         />
-        {errors.email && <span>{errors.email.message}</span>}
+        {errors.email && (
+          <Text color="red" px={3}>
+            {errors.email.message}
+          </Text>
+        )}
       </FormControl>
       <FormControl isRequired>
         <FormLabel>Password</FormLabel>
@@ -114,7 +119,11 @@ const Login = () => {
             </Button>
           </InputRightElement>
         </InputGroup>
-        {errors.password && <span>{errors.password.message}</span>}
+        {errors.password && (
+          <Text color="red" px={3}>
+            {errors.password.message}
+          </Text>
+        )}
       </FormControl>
       <Button
         colorScheme="blue"
