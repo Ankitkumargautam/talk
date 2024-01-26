@@ -36,6 +36,7 @@ const MyChats = ({ fetchAgain, openModalGroup }) => {
 
   useEffect(() => {
     fetchChats();
+    // eslint-disable-next-line
   }, [fetchAgain]);
 
   return (

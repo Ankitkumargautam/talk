@@ -15,9 +15,15 @@
 
 .drawer-content {
   background: #fff;
-  width: 40%;
+  width: 30%;
   height: 100%;
   overflow-y: auto;
+}
+/* Media query for mobile screens */
+@media (max-width: 767px) {
+  .drawer-content {
+    width: 100%;
+  }
 }
 
 .drawer-header {
@@ -33,7 +39,7 @@
 }
 
 .drawer-close-button {
-  background: #ddd;
+  background: rgb(255, 255, 255);
   border: none;
   padding: 5px 10px;
   cursor: pointer;

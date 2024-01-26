@@ -1,12 +1,17 @@
-import { CloseIcon } from '@chakra-ui/icons';
-import { Button, Image, Text } from '@chakra-ui/react';
+import { CloseIcon, ViewIcon } from '@chakra-ui/icons';
+import { Button, IconButton, Image, Text } from '@chakra-ui/react';
 import { ChatState } from '../../Context/ChatProvider';
 import './MyProfileModal.css';
 
-const MyProfileModal = ({ isOpen, closeModal }) => {
-  const { user } = ChatState();
+const MyProfileModalFull = ({ isOpen, openModal, closeModal, user }) => {
+  // const { user } = ChatState();
   return (
     <>
+      <IconButton
+        d={{ base: 'flex' }}
+        icon={<ViewIcon />}
+        onClick={openModal}
+      />
       {isOpen && (
         <div className="modal-overlay-profile">
           <div className="modal-content-profile">
@@ -32,4 +37,4 @@ const MyProfileModal = ({ isOpen, closeModal }) => {
   );
 };
 
-export default MyProfileModal;
+export default MyProfileModalFull;

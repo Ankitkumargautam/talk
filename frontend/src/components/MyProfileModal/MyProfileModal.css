@@ -14,11 +14,27 @@
   background: #fff;
   padding: 20px;
   border-radius: 8px;
+  width: 400px;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.modal-content-profile p {
+  font-size: 20px;
+}
+
+@media (max-width: 440px) {
+  .modal-content-profile {
+    width: 80%;
+  }
 }
 
 .modal-header-profile {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  justify-content: space-between !important;
   align-items: center;
   margin-bottom: 10px;
 }
@@ -26,6 +42,7 @@
 .modal-title-profile {
   font-size: 18px;
   font-weight: bold;
+  padding-right: 100px;
 }
 
 .close-button-profile {
@@ -34,8 +51,5 @@
   cursor: pointer;
   font-size: 16px;
   color: #333;
-}
-
-.modal-body-profile {
-  font-size: 16px;
+  padding-left: 20px;
 }

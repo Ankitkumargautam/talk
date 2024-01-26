@@ -32,3 +32,14 @@
 - protected route and
 - debugging and
 - group creation functionality
+
+7. commit 19 "major bug fix" on 26 jan 2024
+
+- contains all code for fixing the popups :
+
+  - Profile modal
+  - create group modal
+  - side drawer modal
+  - update
+
+8. commit 20 updated above component with html code instead of "Modal"
