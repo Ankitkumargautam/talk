@@ -14,7 +14,11 @@ const MyChats = ({ fetchAgain, openModalGroup }) => {
     try {
       const config = {
         headers: {
-          Authorization: `Bearer ${JSON.parse(localStorage.getItem('token'))}`,
+          Authorization: `Bearer ${
+            user && user.token
+              ? user?.token
+              : JSON.parse(localStorage.getItem('token'))
+          }`,
         },
       };
       const { data } = await axios.get(
@@ -25,7 +29,7 @@ const MyChats = ({ fetchAgain, openModalGroup }) => {
     } catch (error) {
       toast({
         title: 'Error fetching chats',
-        description: error.message,
+        description: error?.response?.data?.message || error?.message,
         status: 'error',
         duration: 5000,
         isClosable: true,
@@ -36,8 +40,7 @@ const MyChats = ({ fetchAgain, openModalGroup }) => {
 
   useEffect(() => {
     fetchChats();
-    // eslint-disable-next-line
-  }, [fetchAgain]);
+  }, [selectedChat]);
 
   return (
     <Box

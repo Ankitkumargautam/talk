@@ -14,12 +14,19 @@
   background: #fff;
   padding: 20px;
   border-radius: 8px;
+  width: 400px;
+}
+@media (max-width: 440px) {
+  .modal-content {
+    width: 80%;
+  }
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 
@@ -38,4 +45,11 @@
 
 .modal-body {
   font-size: 16px;
+}
+
+.modal-footer {
+  margin-top: 10px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }
