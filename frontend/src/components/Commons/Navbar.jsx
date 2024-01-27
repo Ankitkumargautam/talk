@@ -12,7 +12,6 @@ import {
 } from '@chakra-ui/react';
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { ChatState } from '../../Context/ChatProvider';
-import ProfileModal from './ProfileModal';
 import { useNavigate } from 'react-router-dom';
 
 const Navbar = ({ openModal, openModalDrawer }) => {

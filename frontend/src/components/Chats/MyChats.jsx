@@ -64,7 +64,7 @@ const MyChats = ({ fetchAgain, openModalGroup }) => {
         alignItems="center"
       >
         My Chats
-        <GroupChatModal>
+        <Text onClick={() => openModalGroup()}>
           <Button
             d="flex"
             fontSize={{ base: '17px', md: '10px', lg: '17px' }}
@@ -72,10 +72,7 @@ const MyChats = ({ fetchAgain, openModalGroup }) => {
           >
             New Group Chat
           </Button>
-        </GroupChatModal>
-      </Box>
-      <Box p={4}>
-        <Text onClick={() => openModalGroup()}>Group modal</Text>
+        </Text>
       </Box>
       <Box
         d="flex"

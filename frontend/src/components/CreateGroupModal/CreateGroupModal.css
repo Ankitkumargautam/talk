@@ -14,6 +14,16 @@
   background: #fff;
   padding: 20px;
   border-radius: 8px;
+  width: 400px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+@media (max-width: 440px) {
+  .modal-content-group {
+    width: 80%;
+  }
 }
 
 .modal-header-group {
@@ -38,4 +48,10 @@
 
 .modal-body-group {
   font-size: 16px;
+}
+
+.modal-footer-group {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
 }

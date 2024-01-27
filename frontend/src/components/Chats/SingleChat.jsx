@@ -4,7 +4,6 @@ import React from 'react';
 import { ChatState } from '../../Context/ChatProvider';
 import useModal from '../../hooks/useModal';
 import { getSender, getSenderFull } from '../../utils/ChatLogics';
-import ProfileModal from '../Commons/ProfileModal';
 import MyProfileModalFull from '../MyProfileModal/MyProfileModalFull';
 import UpdateGroupChatModal from './UpdateGroupChatModal/UpdateGroupChatModal';
 
