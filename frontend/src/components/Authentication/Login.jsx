@@ -15,6 +15,7 @@ import { useForm, Controller } from 'react-hook-form';
 import axios from 'axios';
 import useShow from '../../hooks/useShow';
 import { useNavigate } from 'react-router-dom';
+import { ChatState } from '../../Context/ChatProvider';
 
 const Login = () => {
   const {
@@ -29,6 +30,8 @@ const Login = () => {
 
   const [show, setShow] = useShow();
   const [loading, setLoading] = useState(false);
+
+  const { setUser } = ChatState();
 
   const onSubmit = async (formData) => {
     setLoading(true);
@@ -47,6 +50,11 @@ const Login = () => {
 
       localStorage.setItem('userInfo', JSON.stringify(data));
       localStorage.setItem('token', JSON.stringify(data.token));
+
+      const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+      // if (!userInfo) navigate('/');
+      setUser(data);
+
       navigate('/chats');
     } catch (error) {
       toast({
