@@ -1,16 +1,22 @@
 import { ArrowBackIcon } from '@chakra-ui/icons';
-import { Box, IconButton, Text } from '@chakra-ui/react';
-import React from 'react';
+import { Box, FormControl, IconButton, Input, Text } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import { ChatState } from '../../Context/ChatProvider';
 import useModal from '../../hooks/useModal';
 import { getSender, getSenderFull } from '../../utils/ChatLogics';
 import MyProfileModalFull from '../MyProfileModal/MyProfileModalFull';
+import ScrollableChat from './ScrollableChat';
 import UpdateGroupChatModal from './UpdateGroupChatModal/UpdateGroupChatModal';
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat, setSelectedChat, user } = ChatState();
   const { isOpen, openModal, closeModal } = useModal();
+  const [messages, setMessages] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [newMessage, setNewMessage] = useState('');
 
+  const sendMessage = (e) => {};
+  const typeingHandler = (e) => {};
   return (
     <>
       {Object.keys(selectedChat).length > 0 ? (
@@ -50,6 +56,35 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               </>
             )}
           </Text>
+          <Box
+            d="flex"
+            flexDir="column"
+            justifyContent="flex-end"
+            p={3}
+            bg="#E8E8E8"
+            w="100%"
+            h="100%"
+            borderRadius="lg"
+            overflowY="hidden"
+          >
+            <div className="messages">
+              <ScrollableChat messages={messages} />
+            </div>
+            <FormControl
+              onKeyDown={sendMessage}
+              id="first-name"
+              isRequired
+              mt={3}
+            >
+              <Input
+                variant="filled"
+                bg="#E0E0E0"
+                placeholder="Enter a message.."
+                value={newMessage}
+                onChange={typeingHandler}
+              />
+            </FormControl>
+          </Box>
         </>
       ) : (
         <Box d="flex" alignItems="center" justifyContent="center" h="100%">

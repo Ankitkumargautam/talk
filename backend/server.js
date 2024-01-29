@@ -4,6 +4,7 @@ const { chats } = require('./data/data');
 var colors = require('colors/safe');
 const userRoute = require('./route/userRoute');
 const chatRoute = require('./route/chatRoute');
+const messageRoute = require('./route/messageRoute');
 const { errorHandler } = require('./middleware/errorMiddleware');
 const cors = require('cors');
 
@@ -18,6 +19,7 @@ app.use(express.json());
 //route
 app.use('/api/users', userRoute);
 app.use('/api/chat', chatRoute);
+app.use('/api/message', messageRoute);
 
 //error handling for any error in api
 app.use(errorHandler);
