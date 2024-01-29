@@ -1,6 +1,15 @@
-import { ArrowBackIcon } from '@chakra-ui/icons';
-import { Box, FormControl, IconButton, Input, Text } from '@chakra-ui/react';
-import React, { useState } from 'react';
+import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import {
+  Box,
+  Button,
+  FormControl,
+  IconButton,
+  Input,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { ChatState } from '../../Context/ChatProvider';
 import useModal from '../../hooks/useModal';
 import { getSender, getSenderFull } from '../../utils/ChatLogics';
@@ -15,8 +24,85 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState('');
 
-  const sendMessage = (e) => {};
-  const typeingHandler = (e) => {};
+  const toast = useToast();
+
+  const sendMessage = async (e) => {
+    if (e.key === 'Enter' && newMessage) {
+      try {
+        const config = {
+          headers: {
+            Authorization: `Bearer ${
+              user && user.token
+                ? user?.token
+                : JSON.parse(localStorage.getItem('token'))
+            }`,
+          },
+        };
+        const { data } = await axios.post(
+          `${process.env.REACT_APP_BASEURL}/api/message`,
+          {
+            chatId: selectedChat._id,
+            content: newMessage,
+          },
+          config
+        );
+        setNewMessage('');
+        setMessages([...messages, data]);
+      } catch (error) {
+        toast({
+          title: 'Error Occured!',
+          description: 'Failed to send the Message',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'bottom',
+        });
+      }
+    }
+  };
+  const typeingHandler = (e) => {
+    setNewMessage(e.target.value);
+    console.log('new msg: ', newMessage);
+  };
+
+  const fetchMessages = async () => {
+    if (!selectedChat) return;
+
+    try {
+      const config = {
+        headers: {
+          Authorization: `Bearer ${
+            user && user.token
+              ? user?.token
+              : JSON.parse(localStorage.getItem('token'))
+          }`,
+        },
+      };
+      setLoading(true);
+      const { data } = await axios.get(
+        `${process.env.REACT_APP_BASEURL}/api/message/${selectedChat._id}`,
+        config
+      );
+      setMessages(data);
+      setLoading(false);
+      console.log('msg: ', messages);
+    } catch (error) {
+      setLoading(false);
+      toast({
+        title: 'Error fetching chats',
+        description: error?.response?.data?.message || error?.message,
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'bottom-left',
+      });
+    }
+  };
+
+  useEffect(() => {
+    fetchMessages();
+  }, [selectedChat]);
+
   return (
     <>
       {Object.keys(selectedChat).length > 0 ? (
@@ -71,6 +157,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
               <ScrollableChat messages={messages} />
             </div>
             <FormControl
+              d="flex"
               onKeyDown={sendMessage}
               id="first-name"
               isRequired
