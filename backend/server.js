@@ -41,4 +41,25 @@ const io = require('socket.io')(server, {
 
 io.on('connection', (socket) => {
   console.log('Connected to socket.io');
+  socket.on('setup', (userData) => {
+    socket.join(userData._id); //now the socket will know all the users by their id so that we can send any information to any user by their id
+    console.log('userid setup : ', userData._id);
+    socket.emit('connected');
+  });
+  socket.on('join chat', (room) => {
+    socket.join(room); // now socket will know about the chats by having their chat id here | room = chat ids |
+    console.log('user joined room: ', room);
+  });
+  socket.on('new message', (newMessageReceived) => {
+    let chat = newMessageReceived.chat;
+    if (!chat.users) return console.log('chat.users not defined');
+
+    chat.users.forEach((user) => {
+      if (user._id == newMessageReceived.sender._id) return;
+      console.log('user - ', user);
+      socket.in(user._id).emit('message received', newMessageReceived);
+    });
+  });
+  socket.on('typing', (room) => socket.in(room).emit('typing'));
+  socket.on('stop typing', (room) => socket.in(room).emit('stop typing'));
 });

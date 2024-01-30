@@ -53,7 +53,7 @@ const sendMessage = asyncHandler(async (req, res) => {
       select: 'name pic email',
     });
 
-    console.log('message : ', message);
+    // console.log('message : ', message);
 
     await Chat.findByIdAndUpdate(chatId, { latestMessage: message._id });
     res.status(200).json(message);

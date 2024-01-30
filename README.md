@@ -43,3 +43,25 @@
   - update
 
 8. commit 20 updated above component with html code instead of "Modal"
+
+9. commit 27 date 30 jan 2024
+
+- implemented socket for folowing functionality in reference of backend-
+  - "connection": to make connection to socket
+  - "setup": to join user id to the socket
+  - "connected": to give frontend information of user join to socket
+  - "join chat": to join chat id's to create room which will be used
+    to give notification to user room later
+  - "new message": to get new message data from fortend and then give
+    the data to all user by emiting "message received" with the help
+    of user id that connected in "setup"
+  - "message received": to give all user the message data which is
+    send by some user in the chat obj except the sender user
+  - on "typing": to get info from room(chat Id which was joined in
+    "connected" socket) that typing is going on in this room
+  - emit "typing": to give frontend the info that typing is happening
+    in this room with the help of chatId
+  - on "stop typing": to get info from room(chat Id which was joined in
+    "connected" socket) that typing is stop in this room
+  - emit "stop typing": to give frontend the info that typing is stopped
+    in this room with the help of chatId
