@@ -1,21 +1,22 @@
-import { ArrowBackIcon, ArrowForwardIcon } from '@chakra-ui/icons';
+import { ArrowBackIcon } from '@chakra-ui/icons';
 import {
   Box,
-  Button,
   FormControl,
   IconButton,
   Input,
+  Spinner,
   Text,
   useToast,
 } from '@chakra-ui/react';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { ChatState } from '../../Context/ChatProvider';
-import useModal from '../../hooks/useModal';
-import { getSender, getSenderFull } from '../../utils/ChatLogics';
-import MyProfileModalFull from '../MyProfileModal/MyProfileModalFull';
-import ScrollableChat from './ScrollableChat';
-import UpdateGroupChatModal from './UpdateGroupChatModal/UpdateGroupChatModal';
+import { ChatState } from '../../../Context/ChatProvider';
+import useModal from '../../../hooks/useModal';
+import { getSender, getSenderFull } from '../../../utils/ChatLogics';
+import MyProfileModalFull from '../../MyProfileModal/MyProfileModalFull';
+import ScrollableChat from '../ScrollableChat';
+import UpdateGroupChatModal from '../UpdateGroupChatModal/UpdateGroupChatModal';
+import './SingleChat.css';
 
 const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   const { selectedChat, setSelectedChat, user } = ChatState();
@@ -89,7 +90,7 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
     } catch (error) {
       setLoading(false);
       toast({
-        title: 'Error fetching chats',
+        title: 'Error on fetching chats',
         description: error?.response?.data?.message || error?.message,
         status: 'error',
         duration: 5000,
@@ -153,9 +154,19 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
             borderRadius="lg"
             overflowY="hidden"
           >
-            <div className="messages">
-              <ScrollableChat messages={messages} />
-            </div>
+            {loading ? (
+              <Spinner
+                size="xl"
+                w={20}
+                h={20}
+                alignSelf="center"
+                margin="auto"
+              />
+            ) : (
+              <div className="messages">
+                <ScrollableChat messages={messages} />
+              </div>
+            )}
             <FormControl
               d="flex"
               onKeyDown={sendMessage}

@@ -28,7 +28,7 @@ const MyChats = ({ fetchAgain, openModalGroup }) => {
       setChats(data);
     } catch (error) {
       toast({
-        title: 'Error fetching chats',
+        title: 'Error in fetching chats',
         description: error?.response?.data?.message || error?.message,
         status: 'error',
         duration: 5000,
