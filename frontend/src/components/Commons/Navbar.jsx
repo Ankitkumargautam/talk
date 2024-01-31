@@ -13,10 +13,18 @@ import {
 import { BellIcon, ChevronDownIcon } from '@chakra-ui/icons';
 import { ChatState } from '../../Context/ChatProvider';
 import { useNavigate } from 'react-router-dom';
+import NotificationBadge from 'react-notification-badge';
+import { Effect } from 'react-notification-badge';
+import { getSender } from '../../utils/ChatLogics';
 
-const Navbar = ({ openModal, openModalDrawer }) => {
+const Navbar = ({
+  openModal,
+  openModalDrawer,
+  notification,
+  setNotification,
+}) => {
   const navigate = useNavigate();
-  const { user } = ChatState();
+  const { user, setSelectedChat } = ChatState();
   const logoutHandler = () => {
     localStorage.removeItem('userInfo');
     navigate('/');
@@ -48,8 +56,29 @@ const Navbar = ({ openModal, openModalDrawer }) => {
         <div>
           <Menu>
             <MenuButton p={1}>
+              <NotificationBadge
+                count={notification.length}
+                effect={Effect.SCALE}
+              />
               <BellIcon fontSize="2xl" m={1} />
             </MenuButton>
+            <MenuList pl={2}>
+              {!notification.length && 'No New Messages'}
+
+              {notification?.map((notif) => (
+                <MenuItem
+                  key={notif._id}
+                  onClick={() => {
+                    setSelectedChat(notif.chat);
+                    setNotification(notification.filter((n) => n !== notif));
+                  }}
+                >
+                  {notif.chat.isGroupChat
+                    ? `new msg in ${notif.chat.chatName}`
+                    : `New msg from ${getSender(user, notif.chat.users)}`}
+                </MenuItem>
+              ))}
+            </MenuList>
           </Menu>
           <Menu>
             <MenuButton as={Button} bg="white" rightIcon={<ChevronDownIcon />}>

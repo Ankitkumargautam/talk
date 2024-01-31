@@ -65,3 +65,7 @@
     "connected" socket) that typing is stop in this room
   - emit "stop typing": to give frontend the info that typing is stopped
     in this room with the help of chatId
+
+9. commit 28 date 31 jan 2024
+
+- implemented real time notification functionality

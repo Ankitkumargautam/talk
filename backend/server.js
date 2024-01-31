@@ -42,8 +42,9 @@ const io = require('socket.io')(server, {
 io.on('connection', (socket) => {
   console.log('Connected to socket.io');
   socket.on('setup', (userData) => {
-    socket.join(userData._id); //now the socket will know all the users by their id so that we can send any information to any user by their id
-    console.log('userid setup : ', userData._id);
+    console.log('::', userData);
+    socket.join(userData?._id); //now the socket will know all the users by their id so that we can send any information to any user by their id
+    console.log('userid setup : ', userData?._id);
     socket.emit('connected');
   });
   socket.on('join chat', (room) => {

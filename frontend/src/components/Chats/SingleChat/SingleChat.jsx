@@ -21,15 +21,26 @@ import io from 'socket.io-client';
 import Lottie from 'react-lottie';
 import animationData from '../../../animations/typing.json';
 
-let socket, selectedChatCompare;
+let selectedChatCompare;
 
-const SingleChat = ({ fetchAgain, setFetchAgain }) => {
-  const { selectedChat, setSelectedChat, user } = ChatState();
+const SingleChat = ({
+  fetchAgain,
+  setFetchAgain,
+  socketConnected,
+  setSocketConnected,
+  socket,
+}) => {
+  const {
+    selectedChat,
+    setSelectedChat,
+    user,
+    notification,
+    setNotification,
+  } = ChatState();
   const { isOpen, openModal, closeModal } = useModal();
   const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState('');
-  const [socketConnected, setSocketConnected] = useState(false);
   const [typing, setTyping] = useState(false);
   const [isTyping, setIsTyping] = useState(false);
   const toast = useToast();
@@ -132,9 +143,9 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
   };
 
   useEffect(() => {
-    socket = io(process.env.REACT_APP_BASEURL);
-    socket.emit('setup', user);
-    socket.on('connected', () => setSocketConnected(true));
+    // socket = io(process.env.REACT_APP_BASEURL);
+    // socket.emit('setup', user);
+    // socket.on('connected', () => setSocketConnected(true));
     socket.on('typing', () => setIsTyping(true));
     socket.on('stop typing', () => setIsTyping(false));
     // eslint-disable-next-line
@@ -148,14 +159,31 @@ const SingleChat = ({ fetchAgain, setFetchAgain }) => {
 
   useEffect(() => {
     socket.on('message received', (newMessageReceived) => {
-      console.log('newMessageReceived: ', newMessageReceived);
-      setMessages([...messages, newMessageReceived]);
+      console.log(
+        'newMessageReceived: ',
+        newMessageReceived,
+        'selectedChatCompare: ',
+        selectedChatCompare
+      );
+
+      if (
+        selectedChatCompare &&
+        selectedChatCompare._id === newMessageReceived.chat._id
+      ) {
+        setMessages([...messages, newMessageReceived]);
+      }
 
       // if chat is not selected or doesn't match current chat
       // if (
       //   !selectedChatCompare ||
       //   selectedChatCompare._id !== newMessageReceived.chat._id
       // ) {
+      //   if (!notification.includes(newMessageReceived)) {
+      //     setNotification([newMessageReceived, ...notification]);
+      //     setFetchAgain(!fetchAgain);
+      //   }
+      //   // setMessages([...messages, newMessageReceived]);
+      // } else {
       //   setMessages([...messages, newMessageReceived]);
       // }
     });
