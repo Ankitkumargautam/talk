@@ -69,3 +69,14 @@
 9. commit 28 date 31 jan 2024
 
 - implemented real time notification functionality
+
+10 commit 15 feb 2024
+
+- implemented dynamic error response in login frontend
+- implemented server.js in frontend
+  - to create express server in react frontend which can be run by:
+  1. first create build
+  ### `npm run build`
+  2. run the build file
+  ### `node server.js`
+  which will run on 3287 port.

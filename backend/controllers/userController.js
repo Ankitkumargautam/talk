@@ -44,10 +44,9 @@ const loginUser = asyncHandler(async (req, res) => {
   if (!email || !password) {
     throw new Error('Please enter all detail');
   }
+  const user = await User.findOne({ email });
 
   try {
-    const user = await User.findOne({ email });
-
     if (user && (await user.matchPassword(password))) {
       res.status(201).json({
         _id: user._id,
@@ -59,11 +58,13 @@ const loginUser = asyncHandler(async (req, res) => {
       });
     } else {
       res.status(400);
-      throw new Error(`${name} failed to register!`);
+      throw new Error(`${user.name} failed to register!`);
     }
   } catch (error) {
     res.status(500);
-    throw new Error(`${name} failed to register!`);
+    throw new Error(
+      `${user.name} failed to register! try again with correct credentials`
+    );
   }
 });
 
